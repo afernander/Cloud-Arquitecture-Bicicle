@@ -17,7 +17,7 @@ exports.create_post = function (req, res) {
 };
 exports.delete = function (req, res) {
   Bicicleta.removeById(req.body.id);
-  res.redirect("/bicicletas");
+  res.redirect("/");
 };
 exports.update_get = function (req, res) {
     var bici = Bicicleta.findById(req.params.id);
