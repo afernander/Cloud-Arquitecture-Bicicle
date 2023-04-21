@@ -20,12 +20,12 @@ exports.delete = function (req, res) {
   res.redirect("/bicicletas");
 };
 exports.update_get = function (req, res) {
-    Bicicleta.updateById(req.body.id);
-    res.redirect("bicicletas/update");
+    var bici = Bicicleta.findById(req.params.id);
+    res.render("bicicletas/update",{ bici: bici });
 };
 exports.update_post = function (req, res) {
-  var bici = new Bicicleta(req.body.id, req.body.color, req.body.modelo);
+  var bici = new Bicicleta(req.params.id, req.body.color, req.body.modelo);
   bici.ubicacion = [req.body.lat, req.body.lng];
-  Bicicleta.add(bici);
-  res.redirect("bicicletas/update");
+  Bicicleta.update(bici);
+  res.redirect("/");
 };

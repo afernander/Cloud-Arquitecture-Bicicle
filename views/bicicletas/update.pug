@@ -1,12 +1,20 @@
 extends ../layout
 
 block content
+  a(href='/') Volver
+  br
+  br
+  br
   h1 Editar bicicleta
-  form(action='/bicicletas/' + bicicleta.id + '/update', method='post')
+  br
+  br
+  br
+  
+  form(action='/bicicletas/' + bici.id + '/update', method='post')
     label(for='color') Color:
     select(name='color', id='', required)
       each val in ['Blanco' , 'Negro' , 'Rojo', 'Verde']
-        if val === bicicleta.color
+        if val === bici.color
           option(value=val, selected)= val
         else
           option(value=val)= val
@@ -14,16 +22,16 @@ block content
     label(for='modelo') Modelo:
     select(name='modelo', id='', required)
       each val in ['Ruta' , 'Cross' , 'Montian', 'Turismo']
-        if val === bicicleta.modelo
+        if val === bici.modelo
           option(value=val, selected)= val
         else
           option(value=val)= val
     br
     label(for='lat') Latitud:
-    input(type='text' name='lat' value=bicicleta.lat required)
+    input(type='text' name='lat' value=bici.ubicacion[0] required)
     br
     label(for='lng') Longitud:
-    input(type='text' name='lng' value=bicicleta.lng required)
+    input(type='text' name='lng' value=bici.ubicacion[1] required)
     br
     br
     button.btn(type='submit' name='OK') Actualizar

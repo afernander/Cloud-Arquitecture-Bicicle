@@ -16,7 +16,7 @@ router.get("/bicicletas/:id/show", bicicletaController.show);
 router.get("/bicicletas/create", bicicletaController.create_get);
 router.post("/create", bicicletaController.create_post);
 router.get("/bicicletas/:id/update", bicicletaController.update_get);
-router.post("/:id/update", bicicletaController.update_post);
+router.post("/bicicletas/:id/update", bicicletaController.update_post);
 router.post("/bicicletas/:id/delete", bicicletaController.delete);
 
 module.exports = router;

@@ -34,11 +34,9 @@ let Bicicleta = function (id, color, modelo, ubicacion) {
     }
   };
 
-  Bicicleta.updateById = function (aBiciId, color, modelo, ubicacion) {
-    var aBici = Bicicleta.findById(aBiciId);
-    aBici.color = color;
-    aBici.modelo = modelo;
-    aBici.ubicacion = ubicacion;
+  Bicicleta.update = function (aBici) {
+    this.removeById(aBici.id);
+    this.add(aBici);
   };
   
   module.exports = Bicicleta;
