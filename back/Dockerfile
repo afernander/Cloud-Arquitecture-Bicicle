@@ -1,13 +1,22 @@
-FROM mhart/alpine-node:8
-ENV NODE_VERSION 8.9.4
+FROM node:14-alpine
+
+# Create app directory
 
 RUN mkdir /app
 WORKDIR /app
 
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
 COPY package*.json /app/
-RUN npm install
 
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+# Bundle app source
 COPY . /app
-# ENV PORT 8080
-EXPOSE 1111
-ENTRYPOINT [ "npm", "start"]
+
+ENV NODE_ENV QA
+ENV PORT 3000
+EXPOSE 3000
+CMD ["npm", "start"]
