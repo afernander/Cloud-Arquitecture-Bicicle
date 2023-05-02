@@ -14,12 +14,6 @@ let Bicicleta = function (id, color, modelo, ubicacion) {
   };
   Bicicleta.findById = function (aBiciId) {
     var aBici = Bicicleta.allBicis.find((x) => x.id == Number(aBiciId));
-    /* for(b in Bicicleta){
-      if(b.id == aBiciId){
-        aBici = b;
-        break;
-      }
-    } */
     if (aBici) return aBici;
     else throw new Error(`No existe una Bicicleta con el id: ${aBiciId}`);
   };
