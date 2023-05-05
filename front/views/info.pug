@@ -1,0 +1,257 @@
+extend layout
+
+block content
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description' content='')
+    meta(name='author' content='')
+    title Heroic Features - Start Bootstrap Template
+    // Favicon
+    link(rel='icon' type='image/x-icon' href='assets/favicon.ico')
+    // Bootstrap icons
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css' rel='stylesheet')
+    // Core theme CSS (includes Bootstrap)
+    link(href='css/styles.css' rel='stylesheet')
+  // Responsive navbar
+  .container
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    .container.px-lg-5
+      a.navbar-brand(href='#!') Bicicletas
+      button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.ms-auto.mb-2.mb-lg-0
+          li.nav-item
+            a.nav-link.active(aria-current='page' href='http://localhost:3100') Home
+          li.nav-item
+            a.nav-link(href='/bicicletas') Bicicletas
+          li.nav-item
+            a.nav-link(href='/info') Informacion
+  // Header
+  div(style="text-align:center")
+    h1 RedBicis micro servicios 
+
+  // Page Content
+  ol
+  li Introducci&oacute;n
+        p
+        | El prop&oacute;sito es definir la arquitectura de este sistema a partir de cloud native y microservicios. En el cual la aplicaci&oacute;n va a permitir un crud b&aacute;sico en el cual se pueda crear, editar, eliminar, listar y ver la informaci&oacute;n en un mapa la informaci&oacute;n sobre bicicletas. El objetivo de este sistema es ofrecer una plataforma eficiente y escalable para la gesti&oacute;n de bicicletas.
+        p &nbsp;
+        ol(start='2')
+        li Aspectos de Negocio
+        p 2.1 Entidades
+        p
+        | - Bicicletas: Informaci&oacute;n de cada bicicleta como su ID, modelo, color, ubicaci&oacute;n (latitud y longitud geogr&aacute;fica).
+        p
+        | - Usuarios: Informaci&oacute;n de cada usuario que interact&uacute;a con el sistema, como su ID, correo electr&oacute;nico, nombre, apellido que se manejan con credenciales de autenticaci&oacute;n de Google.
+        p &nbsp;
+        p 2.2 Actividades
+        p
+        | - Crear bicicleta: Un usuario puede crear una bicicleta especificando su modelo y ubicaci&oacute;n.
+        p
+        | - Editar bicicleta: Un usuario puede editar la informaci&oacute;n de una bicicleta existente, como su modelo y ubicaci&oacute;n.
+        p - Eliminar bicicleta: Un usuario puede eliminar una bicicleta existente.
+        p
+        | - Listar bicicletas: Un usuario puede ver una lista de bicicletas disponibles en el sistema.
+        p
+        | - Autenticar con Google: Los usuarios pueden autenticarse en el sistema utilizando sus credenciales de Google.
+        
+  li
+    p 2.3 Locations
+    p
+      | El sistema no tiene una presencia f&iacute;sica espec&iacute;fica, ya que se trata de un sistema en la nube. Sin embargo, las bicicletas creadas y gestionadas por el sistema tendr&aacute;n una ubicaci&oacute;n f&iacute;sica en diferentes &aacute;reas urbanas. Por lo tanto, es importante considerar el impacto que estas bicicletas pueden tener en la sociedad en t&eacute;rminos de movilidad sostenible, reducci&oacute;n de la huella de carbono, transporte y movilidad.
+    p
+      | Las bicicletas son una alternativa m&aacute;s sostenible y econ&oacute;mica al uso de veh&iacute;culos motorizados, y pueden ayudar a reducir la congesti&oacute;n del tr&aacute;fico y la contaminaci&oacute;n del aire en &aacute;reas urbanas. Al proporcionar una plataforma para la gesti&oacute;n de bicicletas, este sistema puede fomentar el uso de bicicletas como medio de transporte y contribuir as&iacute; a la creaci&oacute;n de una sociedad m&aacute;s sostenible.
+    p &nbsp;
+    p
+      | Adem&aacute;s, el sistema puede tener un impacto indirecto en la sociedad al proporcionar una plataforma segura y f&aacute;cil de usar para la creaci&oacute;n, edici&oacute;n, eliminaci&oacute;n y listado de bicicletas. Esto puede ayudar a fomentar la participaci&oacute;n de m&aacute;s personas en el uso de bicicletas y, por lo tanto, contribuir a mejorar la salud y la calidad de vida de la sociedad en general.
+    p 2.4 Actores
+    p
+      | - Usuarios: Personas que interact&uacute;an con el sistema para crear, editar, eliminar y listar bicicletas.
+    p - Google: Proporciona la autenticaci&oacute;n para los usuarios.
+    p &nbsp;
+    p 2.5 Reglas de Negocio (opcional)
+    p
+      | - Las bicicletas solo pueden ser eliminadas si se valida que su id si este registrado.
+    p - Solo los usuarios autenticados pueden crear, editar y eliminar bicicletas.
+    p &nbsp;
+    p 2.6 Eventos de Negocio (opcional)
+    p - Creaci&oacute;n de una nueva bicicleta.
+    p - Modificaci&oacute;n de informaci&oacute;n de una bicicleta existente.
+    p - Eliminaci&oacute;n de una bicicleta existente.
+    p - Visualizaci&oacute;n de las bicicletas en el mapa.
+    p &nbsp;
+    ol(start='3')
+      li Diagrama de Contexto
+      img(src='/img/Diagrama de contexto.jpg', alt='Diagrama de contexto')
+
+  li
+    p El sistema se compone de los siguientes componentes:
+    p
+      | - Usuarios: interact&uacute;an con el sistema para crear, editar, eliminar y listar bicicletas.
+    p
+      | - Servicio de autenticaci&oacute;n de Google: proporciona la autenticaci&oacute;n de los usuarios.
+    p
+      | - Servicio de bicicletas: proporciona la funcionalidad para crear, editar, eliminar y listar bicicletas.
+    p
+      | - Servicio de mapa interactivo: proporciona la funcionalidad para visualizar las bicicletas en un mapa interactivo.
+    p &nbsp;
+    p &nbsp;
+    ol(start='4')
+      li Objetivos
+    p
+      | El objetivo del sistema es proporcionar una plataforma eficiente y escalable para la gesti&oacute;n de bicicletas, permitiendo a los usuarios crear, editar, eliminar y listar bicicletas, autenticarse con Google y visualizar las bicicletas en un mapa interactivo. El sistema debe ser f&aacute;cil de usar, seguro y escalable para manejar grandes cantidades de datos y usuarios.
+    ol(start='5')
+    p 5.Documento de Decisi&oacute;n Arquitect&oacute;nica
+    p &nbsp;
+    p(style='margin-left: 35.4pt;') 5.1. Decisi&oacute;n Arquitect&oacute;nica
+    p(style='margin-left: 35.4pt;')
+      | Esta decisi&oacute;n arquitect&oacute;nica establece la adopci&oacute;n de una arquitectura cloud native y de microservicios para la creaci&oacute;n de una aplicaci&oacute;n de gesti&oacute;n de bicicletas. El sistema permitir&aacute; la creaci&oacute;n, edici&oacute;n, eliminaci&oacute;n y listado de bicicletas a trav&eacute;s de una Rest API, y tambi&eacute;n permitir&aacute; la autenticaci&oacute;n con Google. Adem&aacute;s, el sistema permitir&aacute; la visualizaci&oacute;n de bicicletas en un mapa interactivo de leafet js.
+    p(style='margin-left: 35.4pt;')
+      | En primer lugar, al utilizar una arquitectura basada en microservicios, se puede dividir la aplicaci&oacute;n en componentes independientes que se encargan de realizar tareas espec&iacute;ficas. Cada microservicio se puede desarrollar, desplegar y escalar de manera independiente, lo que facilita el mantenimiento y la evoluci&oacute;n de la aplicaci&oacute;n en el futuro. Adem&aacute;s, si se necesita hacer cambios en una funcionalidad espec&iacute;fica de la aplicaci&oacute;n, solo se tendr&iacute;a que actualizar el microservicio correspondiente, lo que reduce el riesgo de afectar a otras partes de la aplicaci&oacute;n.
+    p(style='margin-left: 35.4pt;')
+      | En segundo lugar, el uso de una arquitectura cloud nativa ofrece la ventaja de tener una infraestructura escalable y flexible, capaz de adaptarse a las necesidades de la aplicaci&oacute;n. Esto significa que la aplicaci&oacute;n se puede ejecutar en un entorno de nube p&uacute;blica como AWS, Google Cloud o Azure, lo que ofrece la capacidad de escalar verticalmente y horizontalmente para manejar cargas de trabajo en constante cambio.
+    p(style='margin-left: 35.4pt;')
+      | Por &uacute;ltimo, microservios es una soluci&oacute;n muy popular y robusta para orquestar y gestionar contenedores en un entorno de nube. dockerizar proporciona escalabilidad, resiliencia y automatizaci&oacute;n en la gesti&oacute;n de microservicios. Al utilizar contenedores, se puede desplegar y gestionar f&aacute;cilmente la aplicaci&oacute;n en un entorno de nube, lo que reduce la complejidad y el tiempo dedicado a la gesti&oacute;n de la infraestructura y se centra en el desarrollo de la aplicaci&oacute;n.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') 5.2. Impactos e Implicaciones
+    p(style='margin-left: 35.4pt;')
+      | La decisi&oacute;n de adoptar una arquitectura cloud native y de microservicios tiene implicaciones en t&eacute;rminos de elecci&oacute;n de tecnolog&iacute;a, costos y soporte. Se requerir&aacute; un conocimiento avanzado de tecnolog&iacute;as de nube y microservicios, as&iacute; como un equipo de desarrollo altamente capacitado para implementar y mantener el sistema. Sin embargo, esta arquitectura permitir&aacute; una mayor escalabilidad, flexibilidad y facilidad de mantenimiento en comparaci&oacute;n con arquitecturas monol&iacute;ticas tradicionales, tambi&eacute;n se necesitar&aacute;n conocimientos en alguna plataforma cloud sea aws, Google cloud o ibm cloud para su posterior despliegue.
+    p(style='margin-left: 35.4pt;')
+      | Tambi&eacute;n tiene ventajas en cuanto a escalabilidad, adaptabilidad y facilidad de mantenimiento. Adem&aacute;s, la integraci&oacute;n con servicios externos como Google y Leaflet permite una mayor funcionalidad y una mejor experiencia de usuario. Sin embargo, el uso de estas tecnolog&iacute;as tambi&eacute;n puede tener implicaciones en cuanto a costos, complejidad y seguridad, que deben ser consideradas.
+  li
+    p(style='margin-left: 35.4pt;') 5.3. Problema y Restricciones
+    p(style='margin-left: 35.4pt;') 5.3.1 Problema
+    p(style='margin-left: 35.4pt;')
+      | El problema que aborda la aplicaci&oacute;n es la gesti&oacute;n de bicicletas, que incluye la creaci&oacute;n, edici&oacute;n, eliminaci&oacute;n y listado de bicicletas. Adem&aacute;s, la aplicaci&oacute;n tiene como objetivo mostrar las bicicletas en un mapa interactivo y autenticar a los usuarios con su cuenta de Google. Uno de los desaf&iacute;os principales es garantizar una buena experiencia de usuario, que implica una alta disponibilidad y un rendimiento r&aacute;pido de la aplicaci&oacute;n. Esto con el fin de que los usuarios puedan alquilar bicicletas como parte de integraci&oacute;n de movilidad y transporte de una ciudad.
+    p &nbsp;
+    p(style='margin-left: 35.4pt;') 5.3.2 Contexto
+    p(style='margin-left: 35.4pt;')
+      | El contexto de la aplicaci&oacute;n es el mercado de la movilidad sostenible en &aacute;reas urbanas. Se busca proporcionar una alternativa m&aacute;s sostenible y econ&oacute;mica al uso de veh&iacute;culos motorizados, en el cual los usuarios podr&aacute;n encontrar bicicletas en un mapa interactivo y alquilarlas.
+    p(style='margin-left: 35.4pt;') 5.3.3 Alcance
+    p(style='margin-left: 35.4pt;')
+      | El alcance de la aplicaci&oacute;n es la creaci&oacute;n, edici&oacute;n, eliminaci&oacute;n y listado de bicicletas, as&iacute; como la autenticaci&oacute;n con Google y la visualizaci&oacute;n de bicicletas en un mapa interactivo.
+    p(style='margin-left: 35.4pt;') 5.3.4 Restricciones
+    p(style='margin-left: 35.4pt;')
+      | Las restricciones incluyen la necesidad de utilizar tecnolog&iacute;as cloud native y de microservicios, la necesidad de integrarse con Google para la autenticaci&oacute;n, y la necesidad de proporcionar una visualizaci&oacute;n de bicicletas en un mapa interactivo de leafet js.
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | La aplicaci&oacute;n debe estar disponible v&iacute;a REST API.
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | La aplicaci&oacute;n debe ser capaz de autenticar con Google.
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | La aplicaci&oacute;n debe tener una funci&oacute;n de visualizaci&oacute;n de bicicletas en un mapa interactivo.
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | Se debe utilizar una arquitectura cloud native y de microservicios.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') 5.3.5 Supuestos
+    p(style='margin-left: 35.4pt;')
+      | Se asume que los usuarios tendr&aacute;n acceso a dispositivos con acceso a navegadores web y una conexi&oacute;n a Internet para acceder al sistema. Tambi&eacute;n se asume que habr&aacute; un equipo de desarrollo capacitado para implementar y mantener la arquitectura cloud native y de microservicios.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') 5.4. An&aacute;lisis de Soluci&oacute;n
+    p(style='margin-left: 35.4pt;') 5.4.1 Arquitectura de la Soluci&oacute;n
+    p(style='margin-left: 35.4pt;')
+      | La arquitectura de la soluci&oacute;n se basar&aacute; en una arquitectura cloud native y de microservicios, que permitir&aacute; la escalabilidad, flexibilidad y facilidad de mantenimiento necesarias para la aplicaci&oacute;n de gesti&oacute;n de bicicletas, esta arquitectura estar&aacute; basada en el modelo de contenedores en microservicios para poder hacer su despliegue y escalabilidad, con lo cual se espera que la aplicaci&oacute;n sea dividida en diferentes servicios para desplegar, como el servicio de visualizaci&oacute;n de mapas, de acciones de bicicletas y autentificaci&oacute;n.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') 5.4.2 An&aacute;lisis Comparativo de Soluciones
+    p(style='margin-left: 35.4pt;')
+      | Se consideraron otras arquitecturas como las monol&iacute;ticas tradicionales, pero se determin&oacute; que la arquitectura cloud native y de microservicios era la mejor opci&oacute;n debido a su escalabilidad, flexibilidad y facilidad de mantenimiento, asi como la mejor capacidad de escalar a demanda y replicaci&oacute;n de servicios para alta demanda.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') 5.4.3. Justificaci&oacute;n
+    p(style='margin-left: 35.4pt;')
+      | La soluci&oacute;n propuesta se enfoca en utilizar tecnolog&iacute;as en la nube y arquitectura de microservicios para mejorar el alcance y escalabilidad de la aplicaci&oacute;n. La decisi&oacute;n de utilizar una arquitectura cloud native y de microservicios se tom&oacute; debido a su capacidad de adaptarse a las necesidades del negocio, su facilidad de mantenimiento y escalabilidad.
+    p(style='margin-left: 35.4pt;')
+      | Adem&aacute;s, se integrar&aacute; la autenticaci&oacute;n de Google para mejorar la seguridad de la aplicaci&oacute;n y se utilizar&aacute; una API externa de mapas para permitir la visualizaci&oacute;n de bicicletas en un mapa interactivo. Esta integraci&oacute;n con API externa de mapas permitir&aacute; a los usuarios ubicar f&aacute;cilmente las bicicletas disponibles.
+    p(style='margin-left: 35.4pt;')
+      | En resumen, la soluci&oacute;n propuesta permitir&aacute; mejorar la eficiencia y escalabilidad de la aplicaci&oacute;n, as&iacute; como la seguridad y facilidad de uso para los usuarios finales. Y su versatilidad ante cambios de demanda en el uso de la aplicaci&oacute;n.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') &nbsp;
+    ol(start='6')
+    p(style='margin-left: 35.4pt;') 6.Diagrama de componentes
+    img(src='/img/Diagrama de componentes.jpg', alt='Diagrama de componentes')
+    
+  li
+    p(style='text-indent: 35.4pt;') 6.1. Modelo de componentes
+    p(style='margin-left: 35.4pt;') Componentes de la Aplicaci&oacute;n
+    p(style='margin-left: 35.4pt;') - Autenticaci&oacute;n (Google OAuth)
+    p(style='margin-left: 35.4pt;') - Servicio de bicicletas (Administrador de Bicicletas)
+    p(style='margin-left: 35.4pt;')
+      | - Servicio de mapas (Visualizaci&oacute;n de mapas con 
+      a(href='https://leafletjs.com/') https://leafletjs.com/
+      |  )
+    p(style='margin-left: 35.4pt;') - Base de Datos (Datos guardados en memoria de ejecuci&oacute;n)
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') 6.1.1. Descripci&oacute;n de Componentes
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | Aplicaci&oacute;n Web: Es el componente que se encarga de ofrecer la interfaz gr&aacute;fica de usuario para la aplicaci&oacute;n. Este componente se comunica con los otros componentes a trav&eacute;s de API REST.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | Servicio de Bicicletas: Este componente ofrece las operaciones CRUD (crear, leer, actualizar y eliminar) para la gesti&oacute;n de las bicicletas en el sistema. Este componente se comunica con el componente de Base de Datos.
+    p &nbsp;
+    p(style='margin-left: 53.4pt;') &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | Servicio de Mapas: Este componente se encarga de la visualizaci&oacute;n de las bicicletas en el mapa interactivo utilizando la librer&iacute;a Leaflet. Este componente se comunica con el Servicio de Bicicletas para obtener la informaci&oacute;n necesaria.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | Base de Datos: Este componente es el encargado de la persistencia de los datos del sistema en memoria de ejecuci&oacute;n. Este componente se comunica con el Servicio de Bicicletas para almacenar y recuperar la informaci&oacute;n necesaria.
+    p &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | Servicio de Autenticaci&oacute;n: Este componente se encarga de la autenticaci&oacute;n del usuario mediante Google. Este componente se comunica con la Aplicaci&oacute;n Web para validar las credenciales del usuario.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    p(style='margin-left: 35.4pt;') 6.1.2. Relaciones de Componentes
+    p &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | La aplicaci&oacute;n web se comunica con el Servicio de Bicicletas y el Servicio de Autenticaci&oacute;n de Google a trav&eacute;s de HTTP REST APIs.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | El Servicio de Bicicletas utiliza la Base de Datos para almacenar y recuperar informaci&oacute;n sobre las bicicletas.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | El Servicio de Bicicletas tambi&eacute;n se comunica con el Servicio de Mapas para obtener informaci&oacute;n sobre la ubicaci&oacute;n de las bicicletas y visualizarla en el mapa.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | El Servicio de Mapas utiliza Leaflet.js para crear el mapa interactivo y se comunica con el Servicio de Bicicletas para obtener informaci&oacute;n sobre las bicicletas y sus ubicaciones.
+    p(style='margin-left: 35.4pt;') &nbsp;
+    ul
+      li
+        span(style="font: 7.0pt 'Times New Roman';")  
+        | El Servicio de Autenticaci&oacute;n de Google se comunica con la aplicaci&oacute;n web para autenticar a los usuarios y permitir el acceso a las funcionalidades de la aplicaci&oacute;n.
+    p &nbsp;
+    ol(start='7')
+    p 7.Diagrama de secuencias
+    img(src='/img/Diagrama de secuencias.jpg', alt='Descripción de la imagen')
+
+    ol(start='8')
+    p 8.Diagrama Entidad
+    img(src='/img/Diagrama Entidad.jpg', alt='Descripción de la imagen')
+    
+    ol(start='9')
+    p 9.Diagrama de despliegue
+    img(src='/img/Diagrama de Despliegue.jpg', alt='Descripción de la imagen')
+      
