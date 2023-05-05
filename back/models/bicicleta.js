@@ -1,74 +1,96 @@
 const sqlite3 = require('sqlite3').verbose();
 
-let db = new sqlite3.Database('./db/mydatabase.db', (err) => {
+let db = new sqlite3.Database('./database/bicicletas.db', (err) => {
   if (err) {
     console.error(err.message);
   }
-  console.log('Connected to the database.');
+  console.log('Connected to the database');
 });
 
-let Bicicleta = function(id, color, modelo, latitud, longitud) {
+let Bicicleta = function(id, color, modelo, latitud, longitud, alquilada) {
   this.id = id;
   this.color = color;
   this.modelo = modelo;
   this.latitud = latitud;
   this.longitud = longitud;
+  this.alquilada = alquilada;
 };
 
 Bicicleta.prototype.toString = function() {
   return `id: ${this.id}| color: ${this.color}`;
 };
 
+// save a bicicleta
+Bicicleta.prototype.save = function() {
+  db.run(
+    `INSERT INTO bicicletas (id, color, modelo, latitud, longitud, alquilada) VALUES (?, ?, ?, ?, ?, ?)`,
+    [this.id, this.color, this.modelo, this.latitud, this.longitud, this.alquilada],
+    function(err) {
+      if (err) {
+        return console.log(err.message);
+      }
+      console.log(`A row has been inserted with rowid ${this.lastID}`);
+    } // callback
+  );
+};
+
+// get all bicicletas
 Bicicleta.allBicis = function(callback) {
-  db.all('SELECT * FROM bicicletas', [], function(err, rows) {
+  db.all(`SELECT * FROM bicicletas`, [], (err, rows) => {
     if (err) {
-      console.error(err.message);
+      return callback(err);
     }
-    let bicis = rows.map((row) => {
-      return new Bicicleta(row.id, row.color, row.modelo, row.latitud, row.longitud);
-    });
-    callback(null, bicis);
+    return callback(null, rows);
   });
 };
 
-Bicicleta.add = function(bici, callback) {
-  db.run('INSERT INTO bicicletas (id, color, modelo, latitud, longitud) VALUES (?, ?, ?, ?, ?)', [bici.id, bici.color, bici.modelo, bici.latitud, bici.longitud], function(err) {
-    if (err) {
-      console.error(err.message);
-    }
-    callback(null);
-  });
-};
-
+// find a bicicleta by id
 Bicicleta.findById = function(id, callback) {
-  db.get('SELECT * FROM bicicletas WHERE id = ?', [id], function(err, row) {
+  db.get(`SELECT * FROM bicicletas WHERE id = ?`, [id], (err, row) => {
     if (err) {
-      console.error(err.message);
+      return callback(err);
     }
-    if (row) {
-      let bici = new Bicicleta(row.id, row.color, row.modelo, row.latitud, row.longitud);
-      callback(null, bici);
-    } else {
-      callback(new Error(`No existe una bicicleta con el id ${id}`));
-    }
+    return callback(null, row);
   });
 };
 
-Bicicleta.removeById = function(id, callback) {
-  db.run('DELETE FROM bicicletas WHERE id = ?', [id], function(err) {
-    if (err) {
-      console.error(err.message);
-    }
-    callback(null);
-  });
-};
-
+// update a bicicleta by id
 Bicicleta.updateById = function(id, newBici, callback) {
-  db.run('UPDATE bicicletas SET color = ?, modelo = ?, latitud = ?, longitud = ? WHERE id = ?', [newBici.color, newBici.modelo, newBici.latitud,newBici.longitud, id], function(err) {
-    if (err) {
-      console.error(err.message);
+  db.run(
+    `UPDATE bicicletas SET color = ?, modelo = ?, latitud = ?, longitud = ?, alquilada = ? WHERE id = ?`,
+    [newBici.color, newBici.modelo, newBici.latitud, newBici.longitud, newBici.alquilada, id],
+    function(err) {
+      if (err) {
+        return callback(err);
+      }
+      console.log(`Row(s) updated: ${this.changes}`);
+      return callback(null, this.changes);
     }
-    callback(null);
+  );
+};
+
+Bicicleta.alquilarById = function(id, newBici, callback) {
+  db.run(
+    `UPDATE bicicletas SET alquilada = ? WHERE id = ?`,
+    [newBici.alquilada, id],
+    function(err) {
+      if (err) {
+        return callback(err);
+      }
+      console.log(`Row(s) updated: ${this.changes}`);
+      return callback(null, this.changes);
+    }
+  );
+};
+
+// delete a bicicleta by id
+Bicicleta.removeById = function(id, callback) {
+  db.run(`DELETE FROM bicicletas WHERE id = ?`, [id], function(err) {
+    if (err) {
+      return callback(err);
+    }
+    console.log(`Row(s) deleted: ${this.changes}`);
+    return callback(null, this.changes);
   });
 };
 

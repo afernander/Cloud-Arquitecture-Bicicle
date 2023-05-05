@@ -2,6 +2,8 @@ FROM node:14-alpine
 
 # Create app directory
 
+RUN apk --no-cache add curl
+
 RUN mkdir /app
 WORKDIR /app
 

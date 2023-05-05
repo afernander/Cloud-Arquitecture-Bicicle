@@ -9,11 +9,9 @@ exports.login = function (req, res) {
   const endpoint = process.env.AUTH_MS + '/auth/google'
   http.get(endpoint, (resp) => {
     let data = '';
-    // A chunk of data has been received.
     resp.on('data', (chunk) => {
       data += chunk;
     });
-    // The whole response has been received. Print out the result.
     resp.on('end', () => {
       res.redirect('/bicicletas')
     });
