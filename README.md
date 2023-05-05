@@ -1,25 +1,42 @@
 Alejandro Fernández Restrepo
 
-
-
 Arquitectura Caso de Estudio Alquiler y gestión de eventos Bicicletas
-
-
-
-
-
-
 
 Ingeniería de sistemas
 
 Arquitecturas avanzadas de software
 
-
-
-
-
-
 EAFIT 2023-1
+
+# Comandos
+
+## Node
+
+npm install
+
+npm start
+
+## Docker
+
+docker network create redbicis
+
+docker build -t front/redbicis .
+
+docker run --network redbicis --name front -d -p 3100:3100 front/redbicis
+
+docker build -t back/redbicis .
+
+docker run --network redbicis --name back -d -p 3000:3000 back/redbicis
+
+docker compose
+
+doker-compose up
+
+docker-compose down
+
+docker-compose build
+
+# About
 
 1\. Introducción
 
