@@ -12,9 +12,13 @@ var bicycles = JSON.parse(document.currentScript.dataset.var);
 console.log(bicycles)
 
 bicycles.forEach(element => {
+        var alquilacion = "";
+    if(element.alquilada != null){
+        alquilacion = "(ALQUILADA)";
+    }
     
     L.marker([element.latitud, element.longitud]).addTo(map)
-    .bindPopup(element.id+" "+element.modelo+" "+element.color)
+    .bindPopup(element.id+" "+element.modelo+" "+element.color+" "+alquilacion)
     .openPopup();
 
 });

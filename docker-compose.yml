@@ -18,6 +18,8 @@ services:
     container_name: back
     ports:
       - "3000:3000"
+    volumes:
+      - ./bicicletas.db:/back/database/bicicletas.db
     networks:
       - redbicis
 
