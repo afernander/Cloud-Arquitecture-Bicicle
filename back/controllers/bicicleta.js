@@ -2,6 +2,14 @@ const Bicicleta = require("../models/bicicleta");
 
 let lastId = 0;
 
+ Bicicleta.bicisCount(function(err, count) {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log(`There are ${count} bicicletas in the database`);
+  lastId = count;
+});
+
 function getLastId() {
   return lastId;
 }

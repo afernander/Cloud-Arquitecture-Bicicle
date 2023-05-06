@@ -20,6 +20,15 @@ Bicicleta.prototype.toString = function() {
   return `id: ${this.id}| color: ${this.color}`;
 };
 
+Bicicleta.bicisCount = function(callback) {
+  db.get(`SELECT COUNT(*) as count FROM bicicletas`, [], (err, row) => {
+    if (err) {
+      return callback(err);
+    }
+    return callback(null, row.count);
+  });
+};
+
 // save a bicicleta
 Bicicleta.prototype.save = function() {
   db.run(

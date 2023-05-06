@@ -1,7 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-const emails = ["alexis12657@gmail.com"];
 
 passport.use(
   "auth-google",
