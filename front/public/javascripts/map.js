@@ -14,7 +14,11 @@ console.log(bicycles)
 bicycles.forEach(element => {
         var alquilacion = "";
     if(element.alquilada != null){
-        alquilacion = "(ALQUILADA)";
+        if(element.alquilada != ""){
+        alquilacion = element.alquilada;
+        }else{
+            alquilacion = "(ALQUILADA)";
+        }
     }
     
     L.marker([element.latitud, element.longitud]).addTo(map)

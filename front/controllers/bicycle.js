@@ -148,7 +148,7 @@ exports.list = function (req, res, next) {
         bicycles: bicycles,
       };
       if (req.user) {
-        data2.iduser = req.user.id;
+        data2.iduser = req.user.displayName;
       }
       res.render('bicycles/index', data2);
     });
@@ -179,7 +179,13 @@ exports.list2 = function (req, res, next) {
     resp.on('end', () => {
       try {
         bicycles = JSON.parse(data)
-        res.render('index', bicycles)
+        var data2 = {
+          bicycles: bicycles,
+        };
+        if (req.user) {
+          data2.iduser = req.user.displayName;
+        }
+        res.render('index',{ bicycles, data2});
       } catch (error) {
         console.log("Error parsing JSON data: " + error.message);
         res.status(500).send("Error parsing JSON data");

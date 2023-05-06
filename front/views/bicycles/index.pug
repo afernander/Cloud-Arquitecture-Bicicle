@@ -60,7 +60,7 @@ block content
                   input(type='hidden' name='alquilada' value=iduser)
                   button.link-button(type='submit' name='submit_param' value='submit_value' class='.btn')='Alquilar'
               else
-                p En uso
+                p En uso #{ bici.alquilada}
             td
               form.inline(method='post' action='/bicicletas/'+bici.id+'/delete')
                 input(type='hidden' name='id' value=bici.id)

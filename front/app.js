@@ -37,7 +37,10 @@ app.get( '/auth/google/callback',
   })
 );
 
+app.get('/protected', isLoggedIn, (req, res) => {
 
+  res.send(`Hello ${JSON.stringify(req.user.displayName)}`);
+});
 
 app.get('/logout', (req, res) => {
   req.logout(function(err) {
@@ -86,38 +89,7 @@ app.use(function (err, req, res, next) {
 });
 
 
-
-/* const passport = require('passport');
-const JwtStrategy = require('passport-jwt').Strategy,
-  ExtractJwt = require('passport-jwt').ExtractJwt;
-app.use(passport.initialize());
-app.use(passport.session()); */
-
 app.use('/', indexRouter);
-/* 
-const cookieExtractor = function (req) {
-  let token = null;
-  if (req && req.cookies) {
-    token = req.cookies['auth'];
-  }
-  return token;
-};
-const TOKEN_SECRET = 'SECRET';
-const opts = {
-  jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-  secretOrKey: TOKEN_SECRET,
-};
-passport.use(
-  'jwt',
-  new JwtStrategy(opts, (jwt_payload, done) => {
-    try {
-      console.log('jwt_payload', jwt_payload);
-      done(null, jwt_payload);
-    } catch (err) {
-      done(err);
-    }
-  }),
-); */
 
 module.exports = app;
 
